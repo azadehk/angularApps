@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <title>Starting Angular</title>
+        <!--angular-->
+    <script src="https://code.angularjs.org/1.5.8/angular.js"></script>
+    <!--site-->
+    <script src="js/app.js"></script>
+</head>
+<!-- Notice here the ng-app references our 'weatherApp' module -->
+<body ng-app='weatherApp'>
+    <!-- Reference the application level controller for the title model. -->
+    <div ng-controller="WeatherCtrl as weather" ng-model="title">
+        <h1>{{title}}</h1>
+		<h3>Run this in brackets and use the Chrome debugger.</h3>
+
+        <hr>
+        <!-- Our one page app works by switching views here. -->
+        <div ng-repeat="fc in weather.weather">
+        Click ->: <label ng-click="weather.showAlert(fc['high'],fc['low'],fc['text'],fc['cityName'])">{{fc['cityName']}}</label><br/>
+
+        </div>
+        <div style="border: 1px blue solid">
+            <p id="city-name">{{weather.CurrentCity}}</p>
+            <p id="weth-desc">{{weather.CurrentCityDesc}}</p>
+            <p id="high-temp"><span ng-show="weather.showElements">High:</span> {{weather.CurrentHighTemp}}</p>
+            <p id="low-temp"><span ng-show="weather.showElements">Low:</span> {{weather.CurrentLowTemp}}</p><br>
+            <div ng-show="weather.showElements">
+                <p>C<input type="radio" ng-model="weather.degree" value="cent" ng-click="weather.updateToC()"></p>
+                <p>F<input type="radio" ng-model="weather.degree" value="far" ng-click="weather.updateToF()"></p>
+            </div>
+        </div>
+        <br/><br/>
+        
+    </div>
+</body>
+</html>
